@@ -165,9 +165,11 @@ if [ "$GOHOSTARCH" != "$GOARCH" -o "$GOHOSTOS" != "$GOOS" ]; then
 	echo
 fi
 
+cat > /dev/null <<EOF
 echo "##### Building packages and commands for $GOOS/$GOARCH."
 CC=$CC_FOR_TARGET "$GOTOOLDIR"/go_bootstrap install $GO_FLAGS -gcflags "$GO_GCFLAGS" -ldflags "$GO_LDFLAGS" -v std cmd
 echo
+EOF
 
 rm -f "$GOTOOLDIR"/go_bootstrap
 

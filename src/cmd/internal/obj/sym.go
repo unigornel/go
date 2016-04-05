@@ -54,6 +54,7 @@ var headers = []struct {
 	{"openbsd", Hopenbsd},
 	{"plan9", Hplan9},
 	{"solaris", Hsolaris},
+	{"unigornel", Hlinux},
 	{"windows", Hwindows},
 	{"windowsgui", Hwindows},
 }

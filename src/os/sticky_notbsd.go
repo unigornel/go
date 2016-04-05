@@ -8,6 +8,7 @@
 // +build !netbsd
 // +build !openbsd
 // +build !solaris
+// +build !unigornel
 
 package os
 

@@ -14,4 +14,5 @@ const GoosNetbsd = 0
 const GoosOpenbsd = 0
 const GoosPlan9 = 0
 const GoosSolaris = 0
+const GoosUnigornel = 0
 const GoosWindows = 0

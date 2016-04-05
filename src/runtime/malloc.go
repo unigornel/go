@@ -158,7 +158,7 @@ const (
 	// On Darwin/arm64, we cannot reserve more than ~5GB of virtual memory,
 	// but as most devices have less than 4GB of physical memory anyway, we
 	// try to be conservative here, and only ask for a 2GB heap.
-	_MHeapMap_TotalBits = (_64bit*sys.GoosWindows)*35 + (_64bit*(1-sys.GoosWindows)*(1-sys.GoosDarwin*sys.GoarchArm64))*39 + sys.GoosDarwin*sys.GoarchArm64*31 + (1-_64bit)*32
+	_MHeapMap_TotalBits = (_64bit*sys.GoosWindows)*35 + (_64bit*(1-sys.GoosWindows)*(1-sys.GoosDarwin*sys.GoarchArm64)*(1-sys.GoosUnigornel))*39 + sys.GoosDarwin*sys.GoarchArm64*31 + sys.GoosUnigornel*26 + (1-_64bit)*32
 	_MHeapMap_Bits      = _MHeapMap_TotalBits - _PageShift
 
 	_MaxMem = uintptr(1<<_MHeapMap_TotalBits - 1)
