@@ -6,15 +6,15 @@
 //
 // THIS FILE IS GENERATED DO NOT EDIT.
 //
-// mksys.py ../include/syscalls.h ../include/mmap.h ../include/futex.h
+// mksys.py --prefix sys --package syscall ../include/syscalls.h ../include/mmap.h ../include/futex.h
 //
 
 #include "go_asm.h"
 #include "textflag.h"
 
 
-// func write(fd uint64, p unsafe.Pointer, n int32) int32
-TEXT runtime·write(SB),NOSPLIT,$0
+// func sysWrite(fd uint64, p unsafe.Pointer, n int32) int32
+TEXT syscall·sysWrite(SB),NOSPLIT,$0
 	MOVQ	fd+0(FP), DI
 	MOVQ	p+8(FP), SI
 	MOVL	n+16(FP), DX
@@ -23,14 +23,14 @@ TEXT runtime·write(SB),NOSPLIT,$0
 	MOVL	AX, ret+24(FP)
 	RET
 
-// func nanotime() uint64
-TEXT runtime·nanotime(SB),NOSPLIT,$0
+// func sysNanotime() uint64
+TEXT syscall·sysNanotime(SB),NOSPLIT,$0
 	LEAQ	sys_nanotime(SB), AX
 	CALL	AX
 	MOVQ	AX, ret+0(FP)
 	RET
 
-TEXT time·now(SB),NOSPLIT,$16
+TEXT syscall·sysNow(SB),NOSPLIT,$16
 	LEAQ	0(SP), DI
 	LEAQ	sys_now(SB), AX
 	CALL	AX
@@ -40,29 +40,29 @@ TEXT time·now(SB),NOSPLIT,$16
 	MOVL	DX, nsec+8(FP)
 	RET
 
-// func thread_id() uint64
-TEXT runtime·thread_id(SB),NOSPLIT,$0
+// func sysThread_id() uint64
+TEXT syscall·sysThread_id(SB),NOSPLIT,$0
 	LEAQ	sys_thread_id(SB), AX
 	CALL	AX
 	MOVQ	AX, ret+0(FP)
 	RET
 
-// func usleep(usec uint32)
-TEXT runtime·usleep(SB),NOSPLIT,$0
+// func sysUsleep(usec uint32)
+TEXT syscall·sysUsleep(SB),NOSPLIT,$0
 	MOVL	usec+0(FP), DI
 	LEAQ	sys_usleep(SB), AX
 	CALL	AX
 	RET
 
-// func nanosleep(nsec uint64)
-TEXT runtime·nanosleep(SB),NOSPLIT,$0
+// func sysNanosleep(nsec uint64)
+TEXT syscall·sysNanosleep(SB),NOSPLIT,$0
 	MOVQ	nsec+0(FP), DI
 	LEAQ	sys_nanosleep(SB), AX
 	CALL	AX
 	RET
 
-// func lwp_create(context unsafe.Pointer, flags uintptr, lwpid unsafe.Pointer) int32
-TEXT runtime·lwp_create(SB),NOSPLIT,$0
+// func sysLwp_create(context unsafe.Pointer, flags uintptr, lwpid unsafe.Pointer) int32
+TEXT syscall·sysLwp_create(SB),NOSPLIT,$0
 	MOVQ	context+0(FP), DI
 	MOVQ	flags+8(FP), SI
 	MOVQ	lwpid+16(FP), DX
@@ -71,34 +71,34 @@ TEXT runtime·lwp_create(SB),NOSPLIT,$0
 	MOVL	AX, ret+24(FP)
 	RET
 
-// func lwp_tramp()
-TEXT runtime·lwp_tramp(SB),NOSPLIT,$0
+// func sysLwp_tramp()
+TEXT syscall·sysLwp_tramp(SB),NOSPLIT,$0
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	RET
 
-// func osyield()
-TEXT runtime·osyield(SB),NOSPLIT,$0
+// func sysOsyield()
+TEXT syscall·sysOsyield(SB),NOSPLIT,$0
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	RET
 
-// func exit(code int32)
-TEXT runtime·exit(SB),NOSPLIT,$0
+// func sysExit(code int32)
+TEXT syscall·sysExit(SB),NOSPLIT,$0
 	MOVL	code+0(FP), DI
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	RET
 
-// func exit1(code int32)
-TEXT runtime·exit1(SB),NOSPLIT,$0
+// func sysExit1(code int32)
+TEXT syscall·sysExit1(SB),NOSPLIT,$0
 	MOVL	code+0(FP), DI
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	RET
 
-// func open(name *byte, mode int32, perm int32) int32
-TEXT runtime·open(SB),NOSPLIT,$0
+// func sysOpen(name *byte, mode int32, perm int32) int32
+TEXT syscall·sysOpen(SB),NOSPLIT,$0
 	MOVQ	name+0(FP), DI
 	MOVL	mode+8(FP), SI
 	MOVL	perm+12(FP), DX
@@ -107,16 +107,16 @@ TEXT runtime·open(SB),NOSPLIT,$0
 	MOVL	AX, ret+16(FP)
 	RET
 
-// func closefd(fd int32) int32
-TEXT runtime·closefd(SB),NOSPLIT,$0
+// func sysClosefd(fd int32) int32
+TEXT syscall·sysClosefd(SB),NOSPLIT,$0
 	MOVL	fd+0(FP), DI
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	MOVL	AX, ret+8(FP)
 	RET
 
-// func read(fd int32, p unsafe.Pointer, n int32) int32
-TEXT runtime·read(SB),NOSPLIT,$0
+// func sysRead(fd int32, p unsafe.Pointer, n int32) int32
+TEXT syscall·sysRead(SB),NOSPLIT,$0
 	MOVL	fd+0(FP), DI
 	MOVQ	p+8(FP), SI
 	MOVL	n+16(FP), DX
@@ -125,22 +125,22 @@ TEXT runtime·read(SB),NOSPLIT,$0
 	MOVL	AX, ret+24(FP)
 	RET
 
-// func raise(sig int32)
-TEXT runtime·raise(SB),NOSPLIT,$0
+// func sysRaise(sig int32)
+TEXT syscall·sysRaise(SB),NOSPLIT,$0
 	MOVL	sig+0(FP), DI
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	RET
 
-// func raiseproc(sig int32)
-TEXT runtime·raiseproc(SB),NOSPLIT,$0
+// func sysRaiseproc(sig int32)
+TEXT syscall·sysRaiseproc(SB),NOSPLIT,$0
 	MOVL	sig+0(FP), DI
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	RET
 
-// func setitimer(mode int32, new *itimerval, old *itimerval)
-TEXT runtime·setitimer(SB),NOSPLIT,$0
+// func sysSetitimer(mode int32, new *itimerval, old *itimerval)
+TEXT syscall·sysSetitimer(SB),NOSPLIT,$0
 	MOVL	mode+0(FP), DI
 	MOVQ	new+8(FP), SI
 	MOVQ	old+16(FP), DX
@@ -148,15 +148,15 @@ TEXT runtime·setitimer(SB),NOSPLIT,$0
 	CALL	AX
 	RET
 
-// func getcontext(ctxt unsafe.Pointer)
-TEXT runtime·getcontext(SB),NOSPLIT,$0
+// func sysGetcontext(ctxt unsafe.Pointer)
+TEXT syscall·sysGetcontext(SB),NOSPLIT,$0
 	MOVQ	ctxt+0(FP), DI
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	RET
 
-// func sigprocmask(mode int32, new *sigset, old *sigset)
-TEXT runtime·sigprocmask(SB),NOSPLIT,$0
+// func sysSigprocmask(mode int32, new *sigset, old *sigset)
+TEXT syscall·sysSigprocmask(SB),NOSPLIT,$0
 	MOVL	mode+0(FP), DI
 	MOVQ	new+8(FP), SI
 	MOVQ	old+16(FP), DX
@@ -164,8 +164,8 @@ TEXT runtime·sigprocmask(SB),NOSPLIT,$0
 	CALL	AX
 	RET
 
-// func sigaction(sig int32, new *sigset, old *sigset)
-TEXT runtime·sigaction(SB),NOSPLIT,$0
+// func sysSigaction(sig int32, new *sigset, old *sigset)
+TEXT syscall·sysSigaction(SB),NOSPLIT,$0
 	MOVL	sig+0(FP), DI
 	MOVQ	new+8(FP), SI
 	MOVQ	old+16(FP), DX
@@ -173,16 +173,16 @@ TEXT runtime·sigaction(SB),NOSPLIT,$0
 	CALL	AX
 	RET
 
-// func munmap(addr unsafe.Pointer, n uintptr)
-TEXT runtime·munmap(SB),NOSPLIT,$0
+// func sysMunmap(addr unsafe.Pointer, n uintptr)
+TEXT syscall·sysMunmap(SB),NOSPLIT,$0
 	MOVQ	addr+0(FP), DI
 	MOVQ	n+8(FP), SI
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	RET
 
-// func madvise(addr unsafe.Pointer, n uintptr, flags int32)
-TEXT runtime·madvise(SB),NOSPLIT,$0
+// func sysMadvise(addr unsafe.Pointer, n uintptr, flags int32)
+TEXT syscall·sysMadvise(SB),NOSPLIT,$0
 	MOVQ	addr+0(FP), DI
 	MOVQ	n+8(FP), SI
 	MOVL	flags+16(FP), DX
@@ -190,22 +190,22 @@ TEXT runtime·madvise(SB),NOSPLIT,$0
 	CALL	AX
 	RET
 
-// func sigaltstack(new *sigaltstackt, old *sigaltstackt)
-TEXT runtime·sigaltstack(SB),NOSPLIT,$0
+// func sysSigaltstack(new *sigaltstackt, old *sigaltstackt)
+TEXT syscall·sysSigaltstack(SB),NOSPLIT,$0
 	MOVQ	new+0(FP), DI
 	MOVQ	old+8(FP), SI
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	RET
 
-// func settls()
-TEXT runtime·settls(SB),NOSPLIT,$0
+// func sysSettls()
+TEXT syscall·sysSettls(SB),NOSPLIT,$0
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	RET
 
-// func sysctl(mib *uint32, miblen uint32, out *byte, size *uintptr, dst *byte, ndst uintptr) int32
-TEXT runtime·sysctl(SB),NOSPLIT,$0
+// func sysSysctl(mib *uint32, miblen uint32, out *byte, size *uintptr, dst *byte, ndst uintptr) int32
+TEXT syscall·sysSysctl(SB),NOSPLIT,$0
 	MOVQ	mib+0(FP), DI
 	MOVL	miblen+8(FP), SI
 	MOVQ	out+16(FP), DX
@@ -217,15 +217,15 @@ TEXT runtime·sysctl(SB),NOSPLIT,$0
 	MOVL	AX, ret+48(FP)
 	RET
 
-// func kqueue() int32
-TEXT runtime·kqueue(SB),NOSPLIT,$0
+// func sysKqueue() int32
+TEXT syscall·sysKqueue(SB),NOSPLIT,$0
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	MOVL	AX, ret+0(FP)
 	RET
 
-// func kevent(kq int32, ch *kqueuet, nch int32, ev *kqueuet, nev int32, ts *timespec) int32
-TEXT runtime·kevent(SB),NOSPLIT,$0
+// func sysKevent(kq int32, ch *kqueuet, nch int32, ev *kqueuet, nev int32, ts *timespec) int32
+TEXT syscall·sysKevent(SB),NOSPLIT,$0
 	MOVL	kq+0(FP), DI
 	MOVQ	ch+8(FP), SI
 	MOVL	nch+16(FP), DX
@@ -237,15 +237,15 @@ TEXT runtime·kevent(SB),NOSPLIT,$0
 	MOVL	AX, ret+48(FP)
 	RET
 
-// func closeonexec(fd int32)
-TEXT runtime·closeonexec(SB),NOSPLIT,$0
+// func sysCloseonexec(fd int32)
+TEXT syscall·sysCloseonexec(SB),NOSPLIT,$0
 	MOVL	fd+0(FP), DI
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	RET
 
-// func mmap(addr unsafe.Pointer, n uintptr, prot int32, flags int32, fd int32, offset uint32) unsafe.Pointer
-TEXT runtime·mmap(SB),NOSPLIT,$0
+// func sysMmap(addr unsafe.Pointer, n uintptr, prot int32, flags int32, fd int32, offset uint32) unsafe.Pointer
+TEXT syscall·sysMmap(SB),NOSPLIT,$0
 	MOVQ	addr+0(FP), DI
 	MOVQ	n+8(FP), SI
 	MOVL	prot+16(FP), DX
@@ -257,8 +257,8 @@ TEXT runtime·mmap(SB),NOSPLIT,$0
 	MOVQ	AX, ret+32(FP)
 	RET
 
-// func futex_wait(addr unsafe.Pointer, val uint32, ns int64) int32
-TEXT runtime·futex_wait(SB),NOSPLIT,$0
+// func sysFutex_wait(addr unsafe.Pointer, val uint32, ns int64) int32
+TEXT syscall·sysFutex_wait(SB),NOSPLIT,$0
 	MOVQ	addr+0(FP), DI
 	MOVL	val+8(FP), SI
 	MOVQ	ns+16(FP), DX
@@ -267,8 +267,8 @@ TEXT runtime·futex_wait(SB),NOSPLIT,$0
 	MOVL	AX, ret+24(FP)
 	RET
 
-// func futex_wake(addr unsafe.Pointer, cnt uint32) int32
-TEXT runtime·futex_wake(SB),NOSPLIT,$0
+// func sysFutex_wake(addr unsafe.Pointer, cnt uint32) int32
+TEXT syscall·sysFutex_wake(SB),NOSPLIT,$0
 	MOVQ	addr+0(FP), DI
 	MOVL	cnt+8(FP), SI
 	LEAQ	sys_futex_wake(SB), AX
