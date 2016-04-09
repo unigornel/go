@@ -20,7 +20,7 @@ TEXT syscall·sysWrite(SB),NOSPLIT,$0
 	MOVL	n+16(FP), DX
 	LEAQ	sys_write(SB), AX
 	CALL	AX
-	MOVQ	AX, ret+24(FP)
+	MOVL	AX, ret+24(FP)
 	RET
 
 // func sysNanotime()
@@ -64,7 +64,7 @@ TEXT syscall·sysLwp_create(SB),NOSPLIT,$0
 	MOVQ	lwpid+16(FP), DX
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
-	MOVQ	AX, ret+24(FP)
+	MOVL	AX, ret+24(FP)
 	RET
 
 // func sysLwp_tramp()
@@ -100,7 +100,7 @@ TEXT syscall·sysOpen(SB),NOSPLIT,$0
 	MOVL	perm+12(FP), DX
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
-	MOVQ	AX, ret+16(FP)
+	MOVL	AX, ret+16(FP)
 	RET
 
 // func sysClosefd(fd int32) int32
@@ -108,7 +108,7 @@ TEXT syscall·sysClosefd(SB),NOSPLIT,$0
 	MOVL	fd+0(FP), DI
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
-	MOVQ	AX, ret+8(FP)
+	MOVL	AX, ret+8(FP)
 	RET
 
 // func sysRead(fd int32, p unsafe.Pointer, n int32) int32
@@ -118,7 +118,7 @@ TEXT syscall·sysRead(SB),NOSPLIT,$0
 	MOVL	n+16(FP), DX
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
-	MOVQ	AX, ret+24(FP)
+	MOVL	AX, ret+24(FP)
 	RET
 
 // func sysRaise(sig int32)
@@ -210,14 +210,14 @@ TEXT syscall·sysSysctl(SB),NOSPLIT,$0
 	MOVQ	ndst+40(FP), R9
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
-	MOVQ	AX, ret+48(FP)
+	MOVL	AX, ret+48(FP)
 	RET
 
 // func sysKqueue() int32
 TEXT syscall·sysKqueue(SB),NOSPLIT,$0
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
-	MOVQ	AX, ret+0(FP)
+	MOVL	AX, ret+0(FP)
 	RET
 
 // func sysKevent(kq int32, ch *kqueuet, nch int32, ev *kqueuet, nev int32, ts *timespec) int32
@@ -230,7 +230,7 @@ TEXT syscall·sysKevent(SB),NOSPLIT,$0
 	MOVQ	ts+40(FP), R9
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
-	MOVQ	AX, ret+48(FP)
+	MOVL	AX, ret+48(FP)
 	RET
 
 // func sysCloseonexec(fd int32)
@@ -260,7 +260,7 @@ TEXT syscall·sysFutex_wait(SB),NOSPLIT,$0
 	MOVQ	ns+16(FP), DX
 	LEAQ	sys_futex_wait(SB), AX
 	CALL	AX
-	MOVQ	AX, ret+24(FP)
+	MOVL	AX, ret+24(FP)
 	RET
 
 // func sysFutex_wake(addr unsafe.Pointer, cnt uint32) int32
@@ -269,5 +269,5 @@ TEXT syscall·sysFutex_wake(SB),NOSPLIT,$0
 	MOVL	cnt+8(FP), SI
 	LEAQ	sys_futex_wake(SB), AX
 	CALL	AX
-	MOVQ	AX, ret+16(FP)
+	MOVL	AX, ret+16(FP)
 	RET
