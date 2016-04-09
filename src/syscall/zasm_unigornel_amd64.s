@@ -35,6 +35,8 @@ TEXT syscall·sysNow(SB),NOSPLIT,$16
 	CALL	AX
 	MOVQ	0(SP), AX
 	MOVL	8(SP), DX
+	MOVQ	AX, sec+0(FP)
+	MOVL	DX, nsec+8(FP)
 	RET
 
 // func sysThread_id()
