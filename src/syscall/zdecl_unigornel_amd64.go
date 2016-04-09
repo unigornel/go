@@ -14,8 +14,8 @@ package syscall
 import "unsafe"
 
 func sysWrite(fd uint64, p unsafe.Pointer, n int32) int32
-func sysNanotime()
-func sysThread_id()
+func sysNanotime() uint64
+func sysThread_id() uint64
 func sysUsleep(usec uint32)
 func sysNanosleep(nsec uint64)
 func sysLwp_create(context unsafe.Pointer, flags uintptr, lwpid unsafe.Pointer) int32

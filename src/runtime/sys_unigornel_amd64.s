@@ -23,10 +23,11 @@ TEXT runtime·write(SB),NOSPLIT,$0
 	MOVL	AX, ret+24(FP)
 	RET
 
-// func nanotime()
+// func nanotime() uint64
 TEXT runtime·nanotime(SB),NOSPLIT,$0
 	LEAQ	sys_nanotime(SB), AX
 	CALL	AX
+	MOVQ	AX, ret+0(FP)
 	RET
 
 TEXT time·now(SB),NOSPLIT,$16
@@ -39,10 +40,11 @@ TEXT time·now(SB),NOSPLIT,$16
 	MOVL	DX, nsec+8(FP)
 	RET
 
-// func thread_id()
+// func thread_id() uint64
 TEXT runtime·thread_id(SB),NOSPLIT,$0
 	LEAQ	sys_thread_id(SB), AX
 	CALL	AX
+	MOVQ	AX, ret+0(FP)
 	RET
 
 // func usleep(usec uint32)
