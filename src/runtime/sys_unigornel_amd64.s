@@ -6,11 +6,10 @@
 //
 // THIS FILE IS GENERATED DO NOT EDIT.
 //
-// mksys.py ../include/syscalls.h ../include/futex.h ../include/mmap.h
+// mksys.py ../include/syscalls.h ../include/mmap.h ../include/futex.h
 //
 
 #include "go_asm.h"
-#include "go_tls.h"
 #include "textflag.h"
 
 
@@ -241,6 +240,19 @@ TEXT runtime·closeonexec(SB),NOSPLIT,$0
 	CALL	AX
 	RET
 
+// func mmap(addr unsafe.Pointer, n uintptr, prot int32, flags int32, fd int32, offset uint32) unsafe.Pointer
+TEXT runtime·mmap(SB),NOSPLIT,$0
+	MOVQ	addr+0(FP), DI
+	MOVQ	n+8(FP), SI
+	MOVL	prot+16(FP), DX
+	MOVL	flags+20(FP), CX
+	MOVL	fd+24(FP), R8
+	MOVL	offset+28(FP), R9
+	LEAQ	sys_mmap(SB), AX
+	CALL	AX
+	MOVQ	AX, ret+32(FP)
+	RET
+
 // func futex_wait(addr unsafe.Pointer, val uint32, ns int64) int32
 TEXT runtime·futex_wait(SB),NOSPLIT,$0
 	MOVQ	addr+0(FP), DI
@@ -258,16 +270,4 @@ TEXT runtime·futex_wake(SB),NOSPLIT,$0
 	LEAQ	sys_futex_wake(SB), AX
 	CALL	AX
 	MOVQ	AX, ret+16(FP)
-	RET
-
-// func mmap(addr unsafe.Pointer, n uintptr, prot int32, flags int32, fd int32, offset uint32)
-TEXT runtime·mmap(SB),NOSPLIT,$0
-	MOVQ	addr+0(FP), DI
-	MOVQ	n+8(FP), SI
-	MOVL	prot+16(FP), DX
-	MOVL	flags+20(FP), CX
-	MOVL	fd+24(FP), R8
-	MOVL	offset+28(FP), R9
-	LEAQ	sys_mmap(SB), AX
-	CALL	AX
 	RET

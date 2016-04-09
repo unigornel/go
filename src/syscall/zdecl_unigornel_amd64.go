@@ -6,7 +6,7 @@
 //
 // THIS FILE IS GENERATED DO NOT EDIT.
 //
-// mksys.py --godecl --convert-pointers --prefix sys --package syscall ../include/syscalls.h ../include/futex.h ../include/mmap.h
+// mksys.py --godecl --convert-pointers --prefix sys --package syscall ../include/syscalls.h ../include/mmap.h ../include/futex.h
 //
 
 package syscall
@@ -40,6 +40,6 @@ func sysSysctl(mib unsafe.Pointer, miblen uint32, out unsafe.Pointer, size unsaf
 func sysKqueue() int32
 func sysKevent(kq int32, ch unsafe.Pointer, nch int32, ev unsafe.Pointer, nev int32, ts unsafe.Pointer) int32
 func sysCloseonexec(fd int32)
+func sysMmap(addr unsafe.Pointer, n uintptr, prot int32, flags int32, fd int32, offset uint32) unsafe.Pointer
 func sysFutex_wait(addr unsafe.Pointer, val uint32, ns int64) int32
 func sysFutex_wake(addr unsafe.Pointer, cnt uint32) int32
-func sysMmap(addr unsafe.Pointer, n uintptr, prot int32, flags int32, fd int32, offset uint32)
