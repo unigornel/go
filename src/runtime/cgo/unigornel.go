@@ -25,6 +25,7 @@ var _progname uintptr
 
 //go:cgo_import_static sys_mmap
 //go:cgo_import_static sys_write
+//go:cgo_import_static sys_read
 //go:cgo_import_static sys_nanotime
 //go:cgo_import_static sys_now
 //go:cgo_import_static sys_thread_id

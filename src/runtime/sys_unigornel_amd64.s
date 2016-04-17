@@ -23,6 +23,16 @@ TEXT runtime·write(SB),NOSPLIT,$0
 	MOVL	AX, ret+24(FP)
 	RET
 
+// func read(fd int32, p unsafe.Pointer, n int32) int32
+TEXT runtime·read(SB),NOSPLIT,$0
+	MOVL	fd+0(FP), DI
+	MOVQ	p+8(FP), SI
+	MOVL	n+16(FP), DX
+	LEAQ	sys_read(SB), AX
+	CALL	AX
+	MOVL	AX, ret+24(FP)
+	RET
+
 // func nanotime() uint64
 TEXT runtime·nanotime(SB),NOSPLIT,$0
 	LEAQ	sys_nanotime(SB), AX
@@ -113,16 +123,6 @@ TEXT runtime·closefd(SB),NOSPLIT,$0
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	MOVL	AX, ret+8(FP)
-	RET
-
-// func read(fd int32, p unsafe.Pointer, n int32) int32
-TEXT runtime·read(SB),NOSPLIT,$0
-	MOVL	fd+0(FP), DI
-	MOVQ	p+8(FP), SI
-	MOVL	n+16(FP), DX
-	LEAQ	_unimplemented_syscall(SB), AX
-	CALL	AX
-	MOVL	AX, ret+24(FP)
 	RET
 
 // func raise(sig int32)

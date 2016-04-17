@@ -871,11 +871,7 @@ func read(fd int, p []byte) (n int, err error) {
 	} else {
 		_p0 = unsafe.Pointer(&_zero)
 	}
-	r0, _, e1 := Syscall(SYS_READ, uintptr(fd), uintptr(_p0), uintptr(len(p)))
-	n = int(r0)
-	if e1 != 0 {
-		err = errnoErr(e1)
-	}
+	n = int(sysRead(int32(fd), _p0, int32(len(p))))
 	return
 }
 

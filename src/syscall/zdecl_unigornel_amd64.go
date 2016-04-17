@@ -14,6 +14,7 @@ package syscall
 import "unsafe"
 
 func sysWrite(fd uint64, p unsafe.Pointer, n int32) int32
+func sysRead(fd int32, p unsafe.Pointer, n int32) int32
 func sysNanotime() uint64
 func sysThread_id() uint64
 func sysUsleep(usec uint32)
@@ -25,7 +26,6 @@ func sysExit(code int32)
 func sysExit1(code int32)
 func sysOpen(name unsafe.Pointer, mode int32, perm int32) int32
 func sysClosefd(fd int32) int32
-func sysRead(fd int32, p unsafe.Pointer, n int32) int32
 func sysRaise(sig int32)
 func sysRaiseproc(sig int32)
 func sysSetitimer(mode int32, new unsafe.Pointer, old unsafe.Pointer)
