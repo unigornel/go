@@ -23,6 +23,16 @@ TEXT syscall·sysWrite(SB),NOSPLIT,$0
 	MOVL	AX, ret+24(FP)
 	RET
 
+// func sysRead(fd int32, p unsafe.Pointer, n int32) int32
+TEXT syscall·sysRead(SB),NOSPLIT,$0
+	MOVL	fd+0(FP), DI
+	MOVQ	p+8(FP), SI
+	MOVL	n+16(FP), DX
+	LEAQ	sys_read(SB), AX
+	CALL	AX
+	MOVL	AX, ret+24(FP)
+	RET
+
 // func sysNanotime() uint64
 TEXT syscall·sysNanotime(SB),NOSPLIT,$0
 	LEAQ	sys_nanotime(SB), AX
@@ -113,16 +123,6 @@ TEXT syscall·sysClosefd(SB),NOSPLIT,$0
 	LEAQ	_unimplemented_syscall(SB), AX
 	CALL	AX
 	MOVL	AX, ret+8(FP)
-	RET
-
-// func sysRead(fd int32, p unsafe.Pointer, n int32) int32
-TEXT syscall·sysRead(SB),NOSPLIT,$0
-	MOVL	fd+0(FP), DI
-	MOVQ	p+8(FP), SI
-	MOVL	n+16(FP), DX
-	LEAQ	_unimplemented_syscall(SB), AX
-	CALL	AX
-	MOVL	AX, ret+24(FP)
 	RET
 
 // func sysRaise(sig int32)
