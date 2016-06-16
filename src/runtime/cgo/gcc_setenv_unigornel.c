@@ -3,11 +3,11 @@
 // license that can be found in the LICENSE file.
 
 // +build cgo
-// +build darwin dragonfly freebsd linux netbsd openbsd solaris
+// +build unigornel
 
-#include "libcgo.h"
+#include "libcgo_unigornel.h"
 
-#include <stdlib.h>
+#include <runtime.h>
 
 /* Stub for calling setenv */
 void
@@ -22,3 +22,4 @@ x_cgo_unsetenv(char *arg)
 {
 	unsetenv(arg);
 }
+
