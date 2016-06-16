@@ -3,9 +3,9 @@
 // license that can be found in the LICENSE file.
 
 // +build cgo
-// +build !unigornel
+// +build unigornel
 
-#include "libcgo.h"
+#include "libcgo_unigornel.h"
 
 /* Stub for calling malloc from Go */
 void
@@ -48,3 +48,4 @@ x_cgo_thread_start(ThreadStart *arg)
 
 	_cgo_sys_thread_start(ts);	/* OS-dependent half */
 }
+
