@@ -15,14 +15,12 @@
 
 // func write(fd uint64, p unsafe.Pointer, n int32) int32
 TEXT runtime·write(SB),NOSPLIT,$0
-	CALL	runtime·entersyscall(SB)
 	MOVQ	fd+0(FP), DI
 	MOVQ	p+8(FP), SI
 	MOVL	n+16(FP), DX
 	LEAQ	sys_write(SB), AX
 	CALL	AX
 	MOVL	AX, ret+24(FP)
-	CALL	runtime·exitsyscall(SB)
 	RET
 
 // func read(fd int32, p unsafe.Pointer, n int32) int32
